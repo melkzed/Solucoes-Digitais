@@ -2,30 +2,40 @@
 // EFEITO VIDEO NOS CARDS
 // ===============================
 
+
 document.addEventListener("DOMContentLoaded", () => {
-
-const cards = document.querySelectorAll(".card-video-container");
-
-cards.forEach(card => {
-
-const video = card.querySelector("video");
-
-if(video){
-
-card.addEventListener("mouseenter", () => {
-
-video.style.display = "block";
-video.play();
-});
-
-card.addEventListener("mouseleave", () => {
-
-video.pause();
-video.currentTime = 0;
-video.style.display = "none";
+    // Efeito vídeo nos cards
+    const cards = document.querySelectorAll(".card-video-container");
+    cards.forEach(card => {
+        const video = card.querySelector("video");
+        if(video){
+            card.addEventListener("mouseenter", () => {
+                video.style.display = "block";
+                video.play();
+            });
+            card.addEventListener("mouseleave", () => {
+                video.pause();
+                video.currentTime = 0;
+                video.style.display = "none";
             });
         }
     });
+
+    // Menu hamburguer mobile
+    const btnHamburguer = document.querySelector('.menu-hamburguer');
+    const menu = document.querySelector('.menu');
+    const menuLinks = document.querySelectorAll('.menu-link');
+    if(btnHamburguer && menu) {
+        btnHamburguer.addEventListener('click', () => {
+            menu.classList.toggle('menu-ativo');
+        });
+        // Fechar menu ao clicar em um link
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                menu.classList.remove('menu-ativo');
+            });
+        });
+    }
 });
 
 function enviarOrcamento(event){
@@ -103,31 +113,39 @@ behavior: "smooth"
     });
 });
 
+
 const sections = document.querySelectorAll("section, main");
 const menuLinks = document.querySelectorAll(".menu-link");
 
-const observer = new IntersectionObserver((entries) => {
+function getOffsetTop(elem) {
+    let offsetTop = 0;
+    while (elem) {
+        offsetTop += elem.offsetTop;
+        elem = elem.offsetParent;
+    }
+    return offsetTop;
+}
 
-entries.forEach(entry => {
+function onScrollActiveSection() {
+    const scrollPos = window.scrollY || window.pageYOffset;
+    const nav = document.querySelector('.navegacao');
+    const navHeight = nav ? nav.offsetHeight : 0;
+    let currentId = '';
+    sections.forEach(section => {
+        const sectionTop = getOffsetTop(section) - navHeight - 10;
+        const sectionHeight = section.offsetHeight;
+        if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
+            currentId = section.getAttribute('id');
+        }
+    });
+    menuLinks.forEach(link => {
+        link.classList.remove('ativo');
+        if (currentId && link.getAttribute('href') === '#' + currentId) {
+            link.classList.add('ativo');
+        }
+    });
+}
 
-if(entry.isIntersecting){
-
-const id = entry.target.getAttribute("id");
-
-menuLinks.forEach(link => {
-
-link.classList.remove("ativo");
-
-if(link.getAttribute("href") === "#" + id){
-link.classList.add("ativo");
-        }});
-    }});
-},
-
-{
-threshold: 0.3
-});
-
-sections.forEach(section => {
-observer.observe(section);
-});
+window.addEventListener('scroll', onScrollActiveSection);
+window.addEventListener('resize', onScrollActiveSection);
+document.addEventListener('DOMContentLoaded', onScrollActiveSection);

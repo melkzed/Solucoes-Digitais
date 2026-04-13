@@ -28,62 +28,15 @@ body {
 .particulas {
     position: fixed;
     top: 0;
-
-    .projetos-caixa {
-        grid-template-columns: 1fr;
-        gap: 1.2rem;
-        padding: 0 0.5rem;
-    }
-
-    .foto-perfil {
-        width: 140px;
-        height: 140px;
-    }
-
-    .sobre-caixa {
-        padding: 1rem;
-    }
-
-    .orcamento-formulario {
-        padding: 1rem;
-    }
-
-    .projetos-card {
-        margin-bottom: 1.2rem;
-    }
-
-    .navegacao {
-        padding: 0.7rem;
-    }
     left: 0;
     width: 100%;
     height: 100%;
-    .menu {
-        flex-direction: column;
-        gap: 0.7rem;
-    }
-    .cabecalho {
-        padding-top: 4rem;
-    }
-    .foto-perfil {
-        width: 90px;
-        height: 90px;
-    }
-    .sobre-caixa, .orcamento-formulario, .contatos-formulario {
-        padding: 0.5rem;
-    }
-    .projetos-caixa-texto {
-        padding: 0.7rem;
-    }
-    .projetos-card {
-        border-radius: 10px;
-    }
-    .navegacao {
-        padding: 0.3rem;
-    }
-    section {
-        padding: 3rem 0.5rem;
-    }
+    z-index: -1;
+    opacity: 0.5;
+    background:
+        radial-gradient(circle at 10% 20%, var(--primaria) 0%, transparent 20%),
+        radial-gradient(circle at 90% 80%, var(--secundaria) 0%, transparent 20%),
+        var(--maisEscuro);
     z-index: -1;
     opacity: 0.5;
 
@@ -110,6 +63,95 @@ body {
     justify-content: center;
     gap: 3rem;
     list-style: none;
+    transition: right 0.3s;
+}
+
+.menu-hamburguer {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 6px;
+    width: 40px;
+    height: 40px;
+    background: var(--vidro);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    z-index: 200;
+    position: relative;
+}
+.menu-hamburguer span {
+    display: block;
+    height: 4px;
+    width: 100%;
+    background: linear-gradient(90deg, var(--primaria), var(--secundaria));
+    border-radius: 2px;
+    transition: 0.3s;
+}
+
+/* Logo mobile navbar */
+.logo-mobile-navbar {
+    display: none;
+    height: 38px;
+    margin-left: 1.2rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    filter: drop-shadow(0 2px 8px rgba(79,70,229,0.10));
+}
+
+@media (max-width: 900px) {
+    .navegacao {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
+        position: fixed;
+        width: 100vw;
+        left: 0;
+        top: 0;
+        z-index: 100;
+        padding: 0;
+        min-height: 90px;
+    }
+    .logo-mobile-navbar {
+        display: block;
+        position: relative;
+        margin: 0.7rem auto 0.2rem auto;
+        left: 0;
+        top: 0;
+        transform: none;
+        z-index: 201;
+        background: transparent;
+        height: 90px;
+        max-width: 90vw;
+        width: auto;
+    }
+    .menu-hamburguer {
+        display: flex;
+        position: absolute;
+        right: 2rem;
+        top: 2.2rem;
+        z-index: 202;
+    }
+    .menu {
+        flex-direction: column;
+        align-items: flex-start;
+        background: rgba(15, 23, 42, 0.98);
+        position: fixed;
+        top: 0;
+        right: -100vw;
+        width: 70vw;
+        max-width: 320px;
+        height: 100vh;
+        padding: 5rem 2rem 2rem 2rem;
+        gap: 2rem;
+        box-shadow: -2px 0 16px rgba(0,0,0,0.2);
+        z-index: 150;
+        transition: right 0.3s;
+    }
+    .menu.menu-ativo {
+        right: 0;
+    }
 }
 
 .menu-link {
@@ -514,19 +556,39 @@ select.campo-form option {
 
 /* responsivo */
 
-@media(max-width:768px) {
+@media (max-width: 900px) {
+    .projetos-caixa {
+        grid-template-columns: 1fr 1fr;
+        gap: 1.2rem;
+        padding: 0 1rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .projetos-caixa {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+        padding: 0 0.5rem;
+    }
+    .projetos-card {
+        width: 100%;
+        min-width: 0;
+        box-sizing: border-box;
+        margin-left: 0;
+        margin-right: 0;
+    }
+}
+
+@media (max-width: 768px) {
     .menu {
         gap: 1.5rem;
     }
-
     h1 {
         font-size: 2.3rem;
     }
-
     h2 {
         font-size: 2rem;
     }
-
     .cabecalho-subtitulo {
         font-size: 1.1rem;
     }
