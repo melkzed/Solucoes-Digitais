@@ -28,9 +28,62 @@ body {
 .particulas {
     position: fixed;
     top: 0;
+
+    .projetos-caixa {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+        padding: 0 0.5rem;
+    }
+
+    .foto-perfil {
+        width: 140px;
+        height: 140px;
+    }
+
+    .sobre-caixa {
+        padding: 1rem;
+    }
+
+    .orcamento-formulario {
+        padding: 1rem;
+    }
+
+    .projetos-card {
+        margin-bottom: 1.2rem;
+    }
+
+    .navegacao {
+        padding: 0.7rem;
+    }
     left: 0;
     width: 100%;
     height: 100%;
+    .menu {
+        flex-direction: column;
+        gap: 0.7rem;
+    }
+    .cabecalho {
+        padding-top: 4rem;
+    }
+    .foto-perfil {
+        width: 90px;
+        height: 90px;
+    }
+    .sobre-caixa, .orcamento-formulario, .contatos-formulario {
+        padding: 0.5rem;
+    }
+    .projetos-caixa-texto {
+        padding: 0.7rem;
+    }
+    .projetos-card {
+        border-radius: 10px;
+    }
+    .navegacao {
+        padding: 0.3rem;
+    }
+    section {
+        padding: 3rem 0.5rem;
+    }
     z-index: -1;
     opacity: 0.5;
 
